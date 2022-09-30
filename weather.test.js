@@ -5,7 +5,11 @@ describe("Weather", () => {
     const mockApi = {
       fetchWeatherData: (city, callback) => {
         callback({
-          coord: { lon: -71.1662, lat: 41.8334 },
+          main: {
+            temp: 15.6,
+            feels_like: 16.2,
+            humidity: 64,
+          },
           weather: [
             {
               id: 803,
@@ -14,14 +18,18 @@ describe("Weather", () => {
               icon: "04d",
             },
           ],
-          base: "stations",
+          name: "Bristol",
         });
       },
     };
     const weather = new Weather(mockApi);
     weather.fetch("Bristol");
     expect(weather.getWeatherData()).toEqual({
-      coord: { lon: -71.1662, lat: 41.8334 },
+      main: {
+        temp: 15.6,
+        feels_like: 16.2,
+        humidity: 64,
+      },
       weather: [
         {
           id: 803,
@@ -30,7 +38,7 @@ describe("Weather", () => {
           icon: "04d",
         },
       ],
-      base: "stations",
+      name: "Bristol",
     });
   });
 });
